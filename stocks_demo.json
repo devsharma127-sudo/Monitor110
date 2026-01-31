@@ -1,0 +1,6 @@
+[
+  {"name": "AAPL", "price": 195, "change": 2.5},
+  {"name": "TSLA", "price": 245, "change": -3.2},
+  {"name": "GOOGL", "price": 138, "change": 1.8},
+  {"name": "AMZN", "price": 156, "change": -1.5}
+]

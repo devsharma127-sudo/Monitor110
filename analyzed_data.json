@@ -1,0 +1,30 @@
+[
+  {
+    "source": "Reuters",
+    "headline": "Stock market rises as investors gain confidence",
+    "text": "Global markets moved higher as investor confidence improved.",
+    "timestamp": "2026-01-31 09:00",
+    "sentiment": "Positive"
+  },
+  {
+    "source": "Yahoo Finance",
+    "headline": "Technology stocks show strong growth",
+    "text": "Tech companies reported strong quarterly earnings.",
+    "timestamp": "2026-01-31 10:15",
+    "sentiment": "Positive"
+  },
+  {
+    "source": "Bloomberg",
+    "headline": "Markets cautious ahead of inflation data",
+    "text": "Investors remain cautious before inflation figures release.",
+    "timestamp": "2026-01-31 11:30",
+    "sentiment": "Neutral"
+  },
+  {
+    "source": "CNBC",
+    "headline": "Energy stocks fall amid oil price concerns",
+    "text": "Energy sector faced losses due to falling oil prices.",
+    "timestamp": "2026-01-31 12:00",
+    "sentiment": "Negative"
+  }
+]

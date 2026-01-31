@@ -1,0 +1,7 @@
+[
+  { "name": "AAPL", "price": 195.42, "change": 2.15 },
+  { "name": "TSLA", "price": 243.10, "change": -3.20 },
+  { "name": "GOOGL", "price": 138.55, "change": 1.40 },
+  { "name": "AMZN", "price": 156.80, "change": -1.85 },
+  { "name": "MSFT", "price": 412.30, "change": 2.90 }
+]

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Market News</title>
+    <style>
+        body { font-family: Arial; background: #eef1f5; padding: 30px; }
+        .news-card { background: white; padding: 20px; margin-bottom: 15px; border-radius: 8px; }
+        input { padding: 10px; width: 250px; }
+        button { padding: 10px; }
+    </style>
+</head>
+<body>
+
+<h1>📰 Market News</h1>
+
+<form method="get">
+    <input type="text" name="q" placeholder="Search news..." value="{{ query }}">
+    <button type="submit">Search</button>
+</form>
+
+<h2>🔥 Latest News</h2>
+{% for item in latest_news %}
+<div class="news-card">
+    <b>{{ item.headline }}</b>
+    <p>{{ item.text }}</p>
+</div>
+{% endfor %}
+
+<h2>📃 All News</h2>
+{% for item in news %}
+<div class="news-card">
+    <b>{{ item.headline }}</b>
+    <p>{{ item.text }}</p>
+    <p><b>Sentiment:</b> {{ item.sentiment }}</p>
+</div>
+{% endfor %}
+
+<a href="/">⬅ Back</a>
+
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Stock Market Demo</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+body {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    margin: 0;
+    background: #f4f5f7;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 20px;
+    padding: 20px;
+}
+
+.left {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+}
+
+.stock-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.green { color: #2ecc71; font-weight: bold; }
+.red { color: #e74c3c; font-weight: bold; }
+
+.right {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.stock-card {
+    background: white;
+    border-radius: 14px;
+    padding: 15px;
+}
+
+.chart-container {
+    width: 100%;
+    height: 160px;
+}
+
+canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.tabs {
+    margin-bottom: 8px;
+}
+
+.tabs span {
+    margin-right: 12px;
+    cursor: pointer;
+    font-size: 13px;
+    color: #777;
+}
+
+.tabs span.active {
+    font-weight: bold;
+    color: black;
+    border-bottom: 2px solid black;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- LEFT SIDE -->
+<div class="left">
+    <h3>📈 Stock Market</h3>
+
+    <div class="stock-row">
+        <span>AAPL — $195.42</span>
+        <span class="green">+2.15%</span>
+    </div>
+
+    <div class="stock-row">
+        <span>TSLA — $243.10</span>
+        <span class="red">-3.20%</span>
+    </div>
+
+    <div class="stock-row">
+        <span>GOOGL — $138.55</span>
+        <span class="green">+1.40%</span>
+    </div>
+
+    <div class="stock-row">
+        <span>AMZN — $156.80</span>
+        <span class="red">-1.85%</span>
+    </div>
+
+    <div class="stock-row">
+        <span>MSFT — $412.30</span>
+        <span class="green">+2.90%</span>
+    </div>
+</div>
+
+<!-- RIGHT SIDE -->
+<div class="right">
+
+<div class="stock-card">
+<h4>AAPL</h4>
+<div class="tabs" id="tabs-aapl"></div>
+<div class="chart-container"><canvas id="chart-aapl"></canvas></div>
+</div>
+
+<div class="stock-card">
+<h4>TSLA</h4>
+<div class="tabs" id="tabs-tsla"></div>
+<div class="chart-container"><canvas id="chart-tsla"></canvas></div>
+</div>
+
+<div class="stock-card">
+<h4>GOOGL</h4>
+<div class="tabs" id="tabs-googl"></div>
+<div class="chart-container"><canvas id="chart-googl"></canvas></div>
+</div>
+
+</div>
+</div>
+
+<script>
+const timeData = {
+    "1D": [10,12,11,14,16,18,17],
+    "1W": [9,10,12,13,15,17,18,19],
+    "1M": [8,9,10,11,13,14,15,16,18],
+    "6M": [6,7,9,10,12,14,16,18,19,21],
+    "1Y": [5,6,7,8,10,12,14,16,18,20,22]
+};
+
+function makeChart(id, color) {
+    return new Chart(document.getElementById(id), {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [{
+                data: [],
+                borderColor: color,
+                backgroundColor: color + "33",
+                fill: true,
+                tension: 0.4,
+                pointRadius: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+                x: { display: false },
+                y: { display: false }
+            }
+        }
+    });
+}
+
+function attachTabs(chart, tabId) {
+    const tabs = ["1D","1W","1M","6M","1Y"];
+    const container = document.getElementById(tabId);
+
+    tabs.forEach(t => {
+        const span = document.createElement("span");
+        span.innerText = t;
+        span.onclick = () => {
+            container.querySelectorAll("span").forEach(s=>s.classList.remove("active"));
+            span.classList.add("active");
+            chart.data.labels = timeData[t].map((_,i)=>i);
+            chart.data.datasets[0].data = timeData[t];
+            chart.update("none");
+        };
+        container.appendChild(span);
+    });
+
+    container.children[0].click();
+}
+
+const aapl = makeChart("chart-aapl","#2ecc71");
+const tsla = makeChart("chart-tsla","#e74c3c");
+const googl = makeChart("chart-googl","#2ecc71");
+
+attachTabs(aapl,"tabs-aapl");
+attachTabs(tsla,"tabs-tsla");
+attachTabs(googl,"tabs-googl");
+</script>
+
+</body>
+</html>
